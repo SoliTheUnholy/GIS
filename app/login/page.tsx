@@ -18,7 +18,7 @@ export default function Login() {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const res = await signIn("credentials", {
-      number: formData.get("number"),
+      username: formData.get("username"),
       password: formData.get("password"),
       redirect: false,
     });
@@ -49,11 +49,10 @@ export default function Login() {
               </div>
             )}
             <div className="grid gap-2">
-              <Label htmlFor="number">شماره تلفن</Label>
+              <Label htmlFor="username">نام کاربری</Label>
               <Input
-                name="number"
-                type="number"
-                placeholder="09012345678"
+                name="username"
+                type="text"
                 required
               />
             </div>
@@ -72,9 +71,6 @@ export default function Login() {
             <Button type="submit" className="w-full">
               ورود
             </Button>
-            <Button variant="outline" className="w-full">
-              ورود با رمز یکبار مصرف
-            </Button>
           </div>
           <div className="mt-4 text-center text-sm">
             حساب کاربری ندارید ؟
@@ -86,7 +82,7 @@ export default function Login() {
       </form>
       <div className="hidden bg-muted lg:block">
         <Image
-          src="/papers_girl.png"
+          src="/register.jpg"
           alt="Image"
           width="960"
           height="1080"

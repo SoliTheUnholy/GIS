@@ -23,13 +23,10 @@ export default function Register() {
   const router = useRouter();
   const ref = useRef<HTMLFormElement>(null);
   const handleSubmit = async (formData: FormData) => {
-    if (formData.get("password") !== formData.get("rpassword")) {
-      setError("Passwords don't match");
-      return;
-    }
     const r = await register({
-      number: formData.get("number"),
+      username: formData.get("username"),
       password: formData.get("password"),
+      secret: formData.get("secret"),
     });
     ref.current?.reset();
     if (r?.error) {
@@ -56,12 +53,11 @@ export default function Register() {
               </div>
             )}
             <div className="grid gap-2">
-              <Label htmlFor="number">شماره تلفن</Label>
+              <Label htmlFor="username">نام کاربری</Label>
               <Input
-                name="number"
-                id="number"
-                type="number"
-                placeholder="09012345678"
+                name="username"
+                id="username"
+                type="text"
               />
             </div>
             <div className="grid gap-2">
@@ -69,14 +65,11 @@ export default function Register() {
               <Input name="password" id="password" type="password" />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="rpassword">تکرار رمز</Label>
-              <Input name="rpassword" id="rpassword" type="password" />
+              <Label htmlFor="secret">کد امنیتی</Label>
+              <Input name="secret" id="secret" type="password" />
             </div>
             <Button type="submit" className="w-full">
               ساخت حساب کاربری
-            </Button>
-            <Button variant="outline" className="w-full">
-              ورود با رمز یکبار مصرف
             </Button>
           </form>
           <div className="mt-4 text-center text-sm">
@@ -88,7 +81,7 @@ export default function Register() {
         </CardContent>
       </Card>
       <div className="hidden h-screen w-full bg-muted lg:block">
-        <div className="h-full w-full bg-[url('/bg-tile.jpg')] bg-repeat object-cover dark:brightness-[0.2] dark:grayscale"></div>
+        <div className="h-full w-full bg-[url('/register.jpg')] object-cover dark:brightness-[0.2] dark:grayscale"></div>
       </div>
     </div>
   );
